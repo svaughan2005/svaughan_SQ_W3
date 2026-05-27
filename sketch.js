@@ -254,6 +254,12 @@ let groundY;
 // Runs once before setup(). Loads all sounds so they are
 // ready before the game starts.
 // ============================================================
+
+let startBG;
+let mainBG;
+let orangeW;
+let blueW;
+
 function preload() {
   // Load all 9 punch sounds into an array
   // A random one will be picked each time a punch lands
@@ -262,6 +268,10 @@ function preload() {
   }
   winSound = loadSound("assets/sounds/win.wav");
   bgMusic = loadSound("assets/sounds/background.mp3");
+  startBG = loadImage("assets/images/start_bg.png");
+  mainBG = loadImage("assets/images/mainBG.jpg");
+  orangeW = loadImage("assets/images/orangeWinBG.jpg");
+  blueW = loadImage("assets/images/blueWinBG.jpg");
 }
 
 // ============================================================
@@ -366,6 +376,7 @@ function endGame(winnerLabel) {
 // Displayed before the game begins.
 // ------------------------------------------------------------
 function drawStartScreen() {
+  image(startBG, 0, 0);
   // Title
   fill(255);
   textAlign(CENTER);
@@ -400,6 +411,11 @@ function drawWinScreen() {
   fill(0, 0, 0, 160);
   rect(0, 0, width, height);
 
+  if (winner === "P1") {
+    image(blueW, 0, 0);
+  } else {
+    image(orangeW, 0, 0);
+  }
   // Winner text — shown in the winner's colour
   fill(winner === "P1" ? color(0, 200, 180) : color(255, 150, 30));
   textAlign(CENTER);
@@ -417,6 +433,7 @@ function drawWinScreen() {
 // Draws the ground plane and dividing line.
 // ------------------------------------------------------------
 function drawArena() {
+  image(mainBG, 0, 0);
   fill(40);
   noStroke();
   rect(0, groundY, width, height - groundY);
