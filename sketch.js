@@ -259,6 +259,7 @@ let startBG;
 let mainBG;
 let orangeW;
 let blueW;
+let shieldSFX;
 
 function preload() {
   // Load all 9 punch sounds into an array
@@ -266,12 +267,13 @@ function preload() {
   for (let i = 1; i <= 9; i++) {
     punchSounds.push(loadSound("assets/sounds/punch_" + i + ".wav"));
   }
-  winSound = loadSound("assets/sounds/win.wav");
-  bgMusic = loadSound("assets/sounds/background.mp3");
+  winSound = loadSound("assets/sounds/winning_sfx.mp3");
+  bgMusic = loadSound("assets/sounds/portal2_remix.mp3");
   startBG = loadImage("assets/images/start_bg.png");
   mainBG = loadImage("assets/images/mainBG.jpg");
   orangeW = loadImage("assets/images/orangeWinBG.jpg");
   blueW = loadImage("assets/images/blueWinBG.jpg");
+  shieldSFX = loadSound("assets/sounds/jump_sfx.mp3");
 }
 
 // ============================================================
@@ -557,5 +559,14 @@ function keyPressed() {
   // Player 2 attack — K key (keyCode 75)
   if (keyCode === 75 && gameState === STATE_FIGHT) {
     fighter2.startAttack(fighter1.x);
+  }
+
+  // shield sfx
+  if (gameState === STATE_FIGHT && keyCode === 76) {
+    shieldSFX.play();
+  }
+
+  if (gameState === STATE_FIGHT && keyCode === 71) {
+    shieldSFX.play();
   }
 }
